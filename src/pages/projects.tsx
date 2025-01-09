@@ -10,7 +10,12 @@ import BouncingAnimation from './components/BouncingAnimation';
 import WigglingText from './components/WigglingText';
 import PulsatingBox from './components/PulsatingGlowingBox';
 import ShapeMorph from './components/ShapeMorph';
-
+import RippleButton from "./components/RippleButton";
+import ExpandingHexagon from "./components/ExpandingHexagon";
+import WavyText from "./components/WavyText";
+import RotatingCube from "./components/RotatingCube";
+import ElasticBall from "./components/ElasticBall";
+import BlinkingLights from "./components/BlinkingLights";
 export default function Home() {
   const components = [
     { id: 1, component: <AnimatedHeading text="Welcome to My Portfolio" /> },
@@ -47,6 +52,12 @@ export default function Home() {
     { id: 10, component: <ShapeMorph /> },
     { id: 11, component: <WigglingText text='framer motion is so cool' /> },
     { id: 12, component: <PulsatingBox /> },
+    { id: 13, component: <RippleButton /> },
+    { id: 14, component: <ExpandingHexagon /> },
+    { id: 15, component: <WavyText /> },
+    { id: 16, component: <RotatingCube /> },
+    { id: 17, component: <ElasticBall /> },
+    { id: 18, component: <BlinkingLights /> },
   ];
 
   return (
