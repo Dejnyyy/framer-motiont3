@@ -5,6 +5,9 @@ import StaggeredList from './components/StaggeredList';
 import DraggableBox from './components/DraggableBox';
 import AnimatedSpinner from './components/AnimatedSpinner';
 import CardFlip from './components/CardFlip';
+import BouncingAnimation from './components/BouncingAnimation';
+
+
 import Link from "next/link"
 
 
@@ -21,20 +24,10 @@ export default function Home() {
       >
         A place where creativity meets code.
       </motion.p>
-      <AnimatedButton text="Click Me" />
-        <DraggableBox />
-        <AnimatedSpinner />
-        <CardFlip />
-        <StaggeredList />
+        
         <Link href={"/projects"}>Projects</Link>
 
-      <motion.div
-  className="p-4 bg-gray-200 rounded shadow"
-  whileHover={{ scale: 1.05 }}
->
-  Hover Me
-</motion.div>
-
+      
     </div>
   );
 }

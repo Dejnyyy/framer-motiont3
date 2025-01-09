@@ -1,20 +1,64 @@
-import ProjectCard from './components/ProjectCard';
-import Link from "next/link"
+import { motion } from 'framer-motion';
+import AnimatedHeading from './components/AnimatedHeading';
+import AnimatedButton from './components/AnimatedButton';
+import StaggeredList from './components/StaggeredList';
+import DraggableBox from './components/DraggableBox';
+import AnimatedSpinner from './components/AnimatedSpinner';
+import CardFlip from './components/CardFlip';
+import BouncingAnimation from './components/BouncingAnimation';
+import Link from "next/link";
 
-export default function Projects() {
-  const projects = [
-    { title: 'Project 1', description: 'An awesome project.' },
-    { title: 'Project 2', description: 'Another great project.' },
-    { title: 'Project 3', description: 'Yet another cool one.' },
+export default function Home() {
+  const components = [
+    { id: 1, component: <AnimatedHeading text="Welcome to My Portfolio" /> },
+    {
+      id: 2,
+      component: (
+        <motion.p
+          className="text-lg text-gray-400"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.5 }}
+        >
+          A place where creativity meets code.
+        </motion.p>
+      ),
+    },
+    { id: 3, component: <AnimatedButton text="Click Me" /> },
+    { id: 4, component: <DraggableBox /> },
+    { id: 5, component: <AnimatedSpinner /> },
+    { id: 6, component: <CardFlip /> },
+    { id: 7, component: <BouncingAnimation /> },
+    { id: 8, component: <StaggeredList /> },
+    {
+      id: 9,
+      component: (
+        <motion.div
+          className="p-4 bg-gray-200 rounded shadow"
+          whileHover={{ scale: 1.05 }}
+        >
+          Hover Me
+        </motion.div>
+      ),
+    },
   ];
 
   return (
-    <div className="min-h-screen p-10 bg-gray-800 text-white">
-      <Link href={"/"}>Back</Link>
-      <h1 className="text-3xl font-bold text-center">My Projects</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-        {projects.map((project, index) => (
-          <ProjectCard key={index} {...project} />
+    <div className="min-h-screen p-10 bg-gray-900 text-white">
+      <Link href="/" className="text-blue-400">
+        Back
+      </Link>
+      <h1 className="text-3xl font-bold text-center mb-6">
+        Interactive Components
+      </h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {components.map(({ id, component }) => (
+          <div
+            key={id}
+            className="p-6 bg-gray-800 rounded-lg shadow-lg flex justify-center items-center"
+          >
+            {component}
+          </div>
         ))}
       </div>
     </div>
