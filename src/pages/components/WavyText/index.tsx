@@ -8,7 +8,7 @@ const WavyText = () => {
       {letters.map((letter, index) => (
         <motion.span
           key={index}
-          className="inline-block"
+          className="inline-block cursor-pointer"
           whileHover={{
             y: -10, // Moves up
             color: "#f59e0b", // Changes color

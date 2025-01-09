@@ -14,7 +14,7 @@ const RotatingCube = () => {
         rotateY: 0,
       }}
       transition={{
-        duration: 3, // Completes one full rotation in 3 seconds
+        duration: 1, // Completes one full rotation in 3 seconds
         repeat: Infinity,
         ease: "linear",
       }}
