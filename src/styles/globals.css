@@ -1,8 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-.transform-style-preserve {
-    transform-style: preserve-3d;
-  }
-  
