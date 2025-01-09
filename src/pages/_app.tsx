@@ -1,16 +1,22 @@
-import { GeistSans } from "geist/font/sans";
-import { type AppType } from "next/app";
-
-import { api } from "~/utils/api";
+import { AnimatePresence, motion } from "framer-motion";
+import { AppType } from "next/app";
 
 import "~/styles/globals.css";
 
-const MyApp: AppType = ({ Component, pageProps }) => {
+const MyApp: AppType = ({ Component, pageProps, router }) => {
   return (
-    <div className={GeistSans.className}>
-      <Component {...pageProps} />
-    </div>
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={router.route}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <Component {...pageProps} />
+      </motion.div>
+    </AnimatePresence>
   );
 };
 
-export default api.withTRPC(MyApp);
+export default MyApp;
