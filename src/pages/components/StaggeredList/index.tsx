@@ -21,7 +21,8 @@ const StaggeredList = () => {
       {items.map((item, index) => (
         <motion.li
           key={index}
-          className="p-4 bg-white text-black rounded shadow"
+          className="p-4 bg-white text-black rounded shadow cursor-pointer"
+          whileHover={{ scale: 1.1 }}
           variants={{
             hidden: { opacity: 0, y: 20 },
             visible: { opacity: 1, y: 0 },

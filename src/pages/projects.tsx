@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { motion } from 'framer-motion';
 import AnimatedHeading from './components/AnimatedHeading';
 import AnimatedButton from './components/AnimatedButton';
@@ -6,7 +7,9 @@ import DraggableBox from './components/DraggableBox';
 import AnimatedSpinner from './components/AnimatedSpinner';
 import CardFlip from './components/CardFlip';
 import BouncingAnimation from './components/BouncingAnimation';
-import Link from "next/link";
+import WigglingText from './components/WigglingText';
+import PulsatingBox from './components/PulsatingGlowingBox';
+import ShapeMorph from './components/ShapeMorph';
 
 export default function Home() {
   const components = [
@@ -34,13 +37,16 @@ export default function Home() {
       id: 9,
       component: (
         <motion.div
-          className="p-4 bg-gray-200 rounded shadow"
-          whileHover={{ scale: 1.05 }}
+          className="p-4 bg-gray-200 text-black rounded shadow"
+          whileHover={{ scale: 1.5 }}
         >
           Hover Me
         </motion.div>
       ),
     },
+    { id: 10, component: <ShapeMorph /> },
+    { id: 11, component: <WigglingText text='framer motion is so cool' /> },
+    { id: 12, component: <PulsatingBox /> },
   ];
 
   return (

@@ -27,7 +27,6 @@ export default function Home() {
         
         <Link href={"/projects"}>Projects</Link>
 
-      
     </div>
   );
 }
