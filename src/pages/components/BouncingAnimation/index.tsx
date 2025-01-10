@@ -38,7 +38,7 @@ const BouncingBallWithTrace = () => {
           }}
           variants={traceVariants}
           initial="hidden"
-          className="absolute w-12 h-12 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-full filter blur-md"
+          className="absolute w-10 h-10 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-full filter blur-md"
           style={{ opacity: (1 - index * 0.2).toFixed(2) }} // Fades each trace more
         />
       ))}

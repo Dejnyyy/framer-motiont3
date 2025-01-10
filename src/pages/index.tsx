@@ -25,7 +25,7 @@ export default function Home() {
         animate={{ x: 0, opacity: 1 }} // Slide to the center
         transition={{
           duration: 1, // Slide duration
-          delay: 1.5, // Delayed to load as the last element
+          delay: 1.2, // Delayed to load as the last element
           ease: "easeInOut", // Smooth slide
         }}
         whileHover={{
@@ -44,10 +44,10 @@ export default function Home() {
             initial={{ opacity: 1, x: 0 }} // Default state
             animate={{
               opacity: 1,
-              x: isHovered ? 5 : 0, // Slight horizontal motion on hover
+              x: isHovered ? 5 : 0,
             }}
             transition={{
-              duration: 0.3, // Smooth transition duration
+              duration: 1, // Smooth transition duration
               ease: "easeInOut",
             }}
           >

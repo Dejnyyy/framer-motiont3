@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 
 const AnimatedHeading = ({ text }: { text: string }) => {
   const words = (text ?? "").split(""); 
-  
+
   return (
     <motion.h1
       className="text-4xl font-bold"
@@ -10,7 +10,7 @@ const AnimatedHeading = ({ text }: { text: string }) => {
       animate="visible"
       variants={{
         hidden: { opacity: 0 },
-        visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
+        visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
       }}
     >
       {words.map((word, index) => (
