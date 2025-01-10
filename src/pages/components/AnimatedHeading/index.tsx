@@ -5,7 +5,7 @@ const AnimatedHeading = ({ text }: { text: string }) => {
 
   return (
     <motion.h1
-      className="text-4xl font-bold"
+      className="text-4xl font-bold mx-5"
       initial="hidden"
       animate="visible"
       variants={{
