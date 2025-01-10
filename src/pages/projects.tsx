@@ -19,15 +19,25 @@ import ElasticBall from "./components/ElasticBall";
 import BlinkingLights from "./components/BlinkingLights";
 export default function Home() {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+  const [isMoving, setIsMoving] = useState(false);
+  let inactivityTimer: NodeJS.Timeout;
+
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
       setCursorPosition({ x: event.clientX, y: event.clientY });
+      setIsMoving(true);
+
+      clearTimeout(inactivityTimer);
+      inactivityTimer = setTimeout(() => {
+        setIsMoving(false);
+      }, 500); // Stop pulsating after 500ms of inactivity
     };
 
     window.addEventListener("mousemove", handleMouseMove);
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
+      clearTimeout(inactivityTimer);
     };
   }, []);
   const components = [
@@ -54,7 +64,7 @@ export default function Home() {
     { id: 9,component: <ShapeMorph /> },
     { id: 10,component: (
       <motion.div
-        className="p-4 bg-gray-200 text-black rounded shadow"
+        className="px-4 py-2 bg-gray-200 text-black rounded shadow"
         whileHover={{ scale: 1.5 }}
       >
         Hover Me
@@ -76,20 +86,20 @@ export default function Home() {
     className="min-h-screen p-10 bg-gradient-to-bl from-blue-800 via-violet-800 to-pink-700 text-white">
        {/* Custom Cursor */}
        <motion.div
-        className="fixed w-6 h-6 bg-purple-500 rounded-full pointer-events-none z-50"
-        style={{
-          top: `${cursorPosition.y - 12}px`, // Center the cursor vertically
-          left: `${cursorPosition.x - 12}px`, // Center the cursor horizontally
-        }}
-        animate={{
-          scale: [1, 1.5, 1], // Pulsating animation
-        }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
+  className="fixed w-6 h-6 bg-purple-500 rounded-full pointer-events-none z-50"
+  style={{
+    top: `${cursorPosition.y - 12}px`, // Center the cursor vertically
+    left: `${cursorPosition.x - 12}px`, // Center the cursor horizontally
+  }}
+  animate={{
+    scale: isMoving ? 1.5 : 1, // Pulsating animation when moving
+    opacity: isMoving ? 1 : 0.5, // Smooth fade-out when not moving
+  }}
+  transition={{
+    duration: 0.5, // Smooth transition for both scale and opacity
+    ease: "easeInOut", // Smooth easing function
+  }}
+/>
        <Link href="/" className="absolute text-blue-400">
     <motion.div 
     animate={{rotate:360}} transition={{
