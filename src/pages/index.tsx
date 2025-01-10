@@ -16,6 +16,7 @@ const particlesArray = Array.from({ length: 15 }); // For fireworks and hearts
 export default function Home() {
   const [fireworks, setFireworks] = useState<Firework[]>([]);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false); // State for hover effect
 
   // Update cursor position
   useEffect(() => {
