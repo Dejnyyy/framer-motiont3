@@ -86,20 +86,20 @@ export default function Home() {
     className="min-h-screen p-10 bg-gradient-to-bl from-blue-800 via-violet-800 to-pink-700 text-white">
        {/* Custom Cursor */}
        <motion.div
-  className="fixed w-6 h-6 bg-purple-500 rounded-full pointer-events-none z-50"
-  style={{
-    top: `${cursorPosition.y - 12}px`, // Center the cursor vertically
-    left: `${cursorPosition.x - 12}px`, // Center the cursor horizontally
-  }}
-  animate={{
-    scale: isMoving ? 1.5 : 1, // Pulsating animation when moving
-    opacity: isMoving ? 1 : 0.5, // Smooth fade-out when not moving
-  }}
-  transition={{
-    duration: 0.5, // Smooth transition for both scale and opacity
-    ease: "easeInOut", // Smooth easing function
-  }}
-/>
+          className="fixed w-6 h-6 bg-yellow-500 rounded-full pointer-events-none z-50"
+          style={{
+            top: `${cursorPosition.y - 12}px`, // Center the cursor vertically
+            left: `${cursorPosition.x - 12}px`, // Center the cursor horizontally
+          }}
+          animate={{
+            scale: isMoving ? 1.5 : 1, // Pulsating animation when moving
+            opacity: isMoving ? 1 : 0.5, // Smooth fade-out when not moving
+          }}
+          transition={{
+            duration: 0.5, // Smooth transition for both scale and opacity
+            ease: "easeInOut", // Smooth easing function
+          }}
+        />
        <Link href="/" className="absolute text-blue-400">
     <motion.div 
     animate={{rotate:360}} transition={{
