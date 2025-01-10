@@ -31,6 +31,7 @@ export default function Home() {
   const y = useTransform(scrollY, (value) => value / 3);
 
   useEffect(() => {
+    
     // Toggle the image based on progress
     const unsubscribe = scrollYProgress.on("change", (progress) => {
       setShowImage(progress > 0.8);
