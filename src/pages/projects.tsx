@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useState, useEffect } from "react";
 import { motion } from 'framer-motion';
 import AnimatedHeading from './components/AnimatedHeading';
 import AnimatedButton from './components/AnimatedButton';
@@ -17,6 +18,18 @@ import RotatingCube from "./components/RotatingCube";
 import ElasticBall from "./components/ElasticBall";
 import BlinkingLights from "./components/BlinkingLights";
 export default function Home() {
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+  useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      setCursorPosition({ x: event.clientX, y: event.clientY });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
   const components = [
     { id: 1, component: <AnimatedHeading text="Welcome to My Portfolio" /> },
     {
@@ -61,7 +74,25 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen p-10 bg-gray-900 text-white">
+    <div 
+    className="min-h-screen p-10 bg-gray-900 text-white">
+       {/* Custom Cursor */}
+       <motion.div
+        className="fixed w-6 h-6 bg-purple-500 rounded-full pointer-events-none z-50"
+        style={{
+          top: `${cursorPosition.y - 12}px`, // Center the cursor vertically
+          left: `${cursorPosition.x - 12}px`, // Center the cursor horizontally
+        }}
+        animate={{
+          scale: [1, 1.5, 1], // Pulsating animation
+        }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+
       <Link href="/" className="text-blue-400">
         Back
       </Link>
