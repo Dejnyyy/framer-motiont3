@@ -83,6 +83,7 @@ export default function Home() {
       </motion.p>
 
       {/* Sliding Projects Link */}
+      {/* Sliding Projects Link */}
       <motion.div
         initial={{ x: "-100vw", opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
@@ -95,10 +96,20 @@ export default function Home() {
           scale: 1.1,
           boxShadow: "0px 0px 20px rgba(59, 130, 246, 0.8)",
         }}
+        onHoverStart={() => setIsHovered(true)}
+        onHoverEnd={() => setIsHovered(false)}
         className="mt-8 px-6 py-3 border border-white text-white font-bold rounded-md shadow-md cursor-pointer transition-all"
       >
         <Link href={"/projects"} passHref>
-          Projects
+          <motion.span
+            animate={{ x: isHovered ? 5 : 0 }} // Slide animation for the text
+            transition={{
+              duration: 0.3,
+              ease: "easeInOut",
+            }}
+          >
+            {isHovered ? "to projects ->" : "Projects"}
+          </motion.span>
         </Link>
       </motion.div>
 
