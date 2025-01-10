@@ -49,7 +49,7 @@ export default function Home() {
   return (
     <div
       onClick={handleClick}
-      className="flex flex-col items-center justify-center h-screen bg-gray-900 text-white relative overflow-hidden"
+      className="flex flex-col items-center justify-center h-screen bg-gradient-to-bl from-blue-800 via-violet-800 to-pink-700 text-white relative overflow-hidden"
     >
       {/* Custom Cursor */}
       <motion.div

@@ -45,27 +45,25 @@ export default function Home() {
         </motion.p>
       ),
     },
-    { id: 3, component: <AnimatedButton text="Click Me" /> },
+    { id: 3, component: <StaggeredList />},
     { id: 4, component: <DraggableBox /> },
     { id: 5, component: <AnimatedSpinner /> },
     { id: 6, component: <CardFlip /> },
-    { id: 7, component: <BouncingAnimation /> },
-    { id: 8, component: <StaggeredList /> },
-    {
-      id: 9,
-      component: (
-        <motion.div
-          className="p-4 bg-gray-200 text-black rounded shadow"
-          whileHover={{ scale: 1.5 }}
-        >
-          Hover Me
-        </motion.div>
-      ),
+    { id: 7, component: <PulsatingBox />},
+    { id: 8, component: <BouncingAnimation />},
+    { id: 9,component: <ShapeMorph /> },
+    { id: 10,component: (
+      <motion.div
+        className="p-4 bg-gray-200 text-black rounded shadow"
+        whileHover={{ scale: 1.5 }}
+      >
+        Hover Me
+      </motion.div>
+    ), 
     },
-    { id: 10, component: <ShapeMorph /> },
-    { id: 11, component: <WigglingText text='framer motion is so cool' /> },
-    { id: 12, component: <PulsatingBox /> },
-    { id: 13, component: <RippleButton /> },
+    { id: 11, component: <RippleButton /> },
+    { id: 12, component: <AnimatedButton text="Click Me" />},
+    { id: 13, component: <WigglingText text='framer motion is so cool' /> },
     { id: 14, component: <ExpandingHexagon /> },
     { id: 15, component: <WavyText /> },
     { id: 16, component: <RotatingCube /> },
@@ -75,7 +73,7 @@ export default function Home() {
 
   return (
     <div 
-    className="min-h-screen p-10 bg-gray-900 text-white">
+    className="min-h-screen p-10 bg-gradient-to-bl from-blue-800 via-violet-800 to-pink-700 text-white">
        {/* Custom Cursor */}
        <motion.div
         className="fixed w-6 h-6 bg-purple-500 rounded-full pointer-events-none z-50"
@@ -92,9 +90,16 @@ export default function Home() {
           ease: "easeInOut",
         }}
       />
-
-      <Link href="/" className="text-blue-400">
+       <Link href="/" className="absolute text-blue-400">
+    <motion.div 
+    animate={{rotate:360}} transition={{
+      duration: 2,
+      repeat: Infinity,
+      ease: "easeInOut",
+      delay: 2,
+    }}>
         Back
+      </motion.div>
       </Link>
       <h1 className="text-3xl font-bold text-center mb-6">
         Interactive Components
