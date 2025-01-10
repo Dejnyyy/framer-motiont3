@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 
 const AnimatedHeading = ({ text }: { text: string }) => {
-  const words = text.split(' ');
-
+  const words = (text ?? "").split(""); 
+  
   return (
     <motion.h1
       className="text-4xl font-bold"
