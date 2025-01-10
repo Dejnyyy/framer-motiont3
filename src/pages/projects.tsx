@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { motion, useAnimation, useScroll, useTransform } from 'framer-motion';
+import { useState, useEffect ,useRef} from "react";
+import { motion, useScroll, useTransform } from 'framer-motion';
 import AnimatedHeading from './components/AnimatedHeading';
 import AnimatedButton from './components/AnimatedButton';
 import StaggeredList from './components/StaggeredList';
@@ -20,10 +20,9 @@ import BlinkingLights from "./components/BlinkingLights";
 export default function Home() {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isMoving, setIsMoving] = useState(false);
-  let inactivityTimer: NodeJS.Timeout;
+  const inactivityTimer = useRef<NodeJS.Timeout | null>(null);
 
 
-  const controls = useAnimation(); // Controls for the moving ball
   const [showImage, setShowImage] = useState(false); // State to toggle between ball and image
   const { scrollY, scrollYProgress } = useScroll(); // Hook for scroll position and progress
 
@@ -49,20 +48,23 @@ export default function Home() {
       setCursorPosition({ x: event.clientX, y: event.clientY });
       setIsMoving(true);
 
-      clearTimeout(inactivityTimer);
-      inactivityTimer = setTimeout(() => {
+      if (inactivityTimer.current) {
+        clearTimeout(inactivityTimer.current);
+      }
+      inactivityTimer.current = setTimeout(() => {
         setIsMoving(false);
-      }, 500); // Stop pulsating after 500ms of inactivity
+      }, 500);
     };
 
     window.addEventListener("mousemove", handleMouseMove);
-
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
-      clearTimeout(inactivityTimer);
+      if (inactivityTimer.current) {
+        clearTimeout(inactivityTimer.current);
+      }
     };
   }, []);
-  const components = [
+  const components: Array<{ id: number; component: JSX.Element }>= [
     { id: 1, component: <AnimatedHeading text="Welcome to My Portfolio" /> },
     {
       id: 2,
@@ -124,12 +126,11 @@ export default function Home() {
         />
        <Link href="/" className="absolute text-blue-400">
     <motion.div 
-    animate={{rotate:360}} transition={{
-      duration: 2,
-      repeat: Infinity,
-      ease: "easeInOut",
-      delay: 2,
-    }}>
+    whileHover={{
+      rotate: [0, 5, -5, 5, -5, 0],
+      scale: 2.5,
+    }}
+    transition={{ duration: 0.5 }}>
         Back
       </motion.div>
       </Link>
@@ -192,7 +193,7 @@ export default function Home() {
 )}
 
 
-        {[...Array(5)].map((_, index) => (
+        {[...Array<number>(5)].map((_, index) => (
           <motion.div
             key={index}
             className="p-6 bg-gray-700 rounded-lg shadow-lg mb-6 text-center text-white"
