@@ -11,8 +11,8 @@ const BouncingBallWithTrace = () => {
       {/* The motion div for the main ball */}
       <motion.div
         animate={{
-          x: [0, -50, 0, 50, 0, 0, 0, 0,0], // Moves horizontally: left, center, right
-          y: [0, 0, 0, 0, 0, -50, 0, 50,0], // Moves vertically: up, center, down
+          x: [0, -50, 0, 50, 0, 0, 0, 0, 0], // Moves horizontally: left, center, right
+          y: [0, 0, 0, 0, 0, -50, 0, 50, 0], // Moves vertically: up, center, down
         }}
         transition={{
           repeat: Infinity,
@@ -23,12 +23,12 @@ const BouncingBallWithTrace = () => {
       />
 
       {/* Trace effect: Additional balls with fading opacity */}
-      {[...Array(5)].map((_, index) => (
+      {Array.from({ length: 5 }, (_, index) => (
         <motion.div
           key={index}
           animate={{
-            x: [0, -50, 0, 50, 0, 0, 0, 0,0], // Same as the main ball
-            y: [0, 0, 0, 0, 0, -50, 0, 50,0],
+            x: [0, -50, 0, 50, 0, 0, 0, 0, 0], // Same as the main ball
+            y: [0, 0, 0, 0, 0, -50, 0, 50, 0],
           }}
           transition={{
             repeat: Infinity,
