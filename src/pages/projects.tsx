@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { motion, useAnimation, useScroll } from 'framer-motion';
+import { motion, useAnimation, useScroll, useTransform } from 'framer-motion';
 import AnimatedHeading from './components/AnimatedHeading';
 import AnimatedButton from './components/AnimatedButton';
 import StaggeredList from './components/StaggeredList';
@@ -24,30 +24,24 @@ export default function Home() {
 
 
   const controls = useAnimation(); // Controls for the moving ball
-  const { scrollY, scrollYProgress } = useScroll(); // Hook for scroll position and progress
   const [showImage, setShowImage] = useState(false); // State to toggle between ball and image
+  const { scrollY, scrollYProgress } = useScroll(); // Hook for scroll position and progress
+
+  // Transform scrollYProgress to x and y values dynamically
+  const x = useTransform(scrollYProgress, [0, 0.2,0.3, 0.4, 0.5, 0.7,0.8, 0.9], [0, -200,-200,-1200, -1200, -700,-700, -400]);
+  const y = useTransform(scrollY, (value) => value / 3);
 
   useEffect(() => {
-    // Subscribe to scrollY updates
+    // Toggle the image based on progress
     const unsubscribe = scrollYProgress.on("change", (progress) => {
-      controls.start({
-        y: scrollY.get() / 3, // Update vertical position
-        x: progress > 0.5 ? -200 : 0, // Move ball to the right after halfway
-      });
-
-      // Change to image if scroll progress exceeds 70%
-      if (progress > 0.8) {
-        setShowImage(true);
-      } else {
-        setShowImage(false);
-      }
+      setShowImage(progress > 0.8);
     });
 
     return () => {
       // Clean up the subscription
       unsubscribe();
     };
-  }, [scrollY, scrollYProgress, controls]);
+  }, [scrollYProgress]);
 
 
   useEffect(() => {
@@ -152,37 +146,51 @@ export default function Home() {
           </div>
         ))}
       </div>
-     {/* Scrolling Section */}
-     <div className="mt-16">
+    {/* Scrolling Section */}
+    <div className="mt-16">
         <h2 className="text-2xl font-bold text-center mb-8">Explore More Features</h2>
         {/* Conditional Rendering for Ball or Image */}
         {!showImage ? (
-          <motion.div
-            className="fixed right-12 w-10 h-10 bg-green-500 rounded-full"
-            animate={controls}
-            style={{
-              top: "20px", // Explicitly set top position
-              // Default left position
-            }}
-            transition={{
-              type: "spring",
-              stiffness: 50,
-              damping: 10,
-            }}
-          />
-        ) : (
-          <motion.img
-            src="/dejny.png"
-            alt="Dynamic Image"
-            className="fixed w-20 h-20 top-4 right-12 rounded-full"
-            animate={controls}
-            transition={{
-              type: "spring",
-              stiffness: 50,
-              damping: 12,
-            }}
-          />
-        )}
+  <motion.div
+    className="fixed w-10 h-10 bg-gradient-to-tr from-amber-300 via-orange-500 to-red-600 rounded-full"
+    style={{
+      top: "20px", // Ensure consistent top positioning
+      right: "12px",
+      x: x, // Dynamically bind x value
+      y: y, // Dynamically bind y value
+    }}
+    animate={{rotate:360}}
+    transition={{
+      type: "spring",
+      stiffness: 50,
+      repeat: Infinity,
+      duration: 1,
+      delay: 0,
+      damping: 10,
+    }}
+  />
+) : (
+  <motion.img
+    src="/dejny.png"
+    alt="Dynamic Image"
+    className="fixed w-20 h-20 top-4 right-12 rounded-full"
+    style={{
+      x: x, // Dynamically bind x value
+      y: y, // Dynamically bind y value
+    }}
+    animate={{rotate:-360}}
+    transition={{
+      type: "spring",
+      stiffness: 50,
+      repeat: Infinity,
+      duration: 2,
+      delay: 0,
+      damping: 12,
+    }}
+   
+  />
+)}
+
 
         {[...Array(5)].map((_, index) => (
           <motion.div
@@ -190,14 +198,12 @@ export default function Home() {
             className="p-6 bg-gray-700 rounded-lg shadow-lg mb-6 text-center text-white"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -50 }} // Disappear on scroll out
+            exit={{ opacity: 0, y: -50 }}
             viewport={{ amount: 0.2 }}
             transition={{ duration: 0.8 }}
           >
-            <h3 className="text-xl font-semibold"> {index + 1}</h3>
-            <p className="mt-2">
-              This is just scroll animation.
-            </p>
+            <h3 className="text-xl font-semibold">Feature {index + 1}</h3>
+            <p className="mt-2">This is just a showcase of scroll animation.</p>
           </motion.div>
         ))}
         <div className="h-screen"></div>
