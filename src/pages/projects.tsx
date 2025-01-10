@@ -203,7 +203,7 @@ export default function Home() {
             viewport={{ amount: 0.2 }}
             transition={{ duration: 0.8 }}
           >
-            <h3 className="text-xl font-semibold">Feature {index + 1}</h3>
+            <h3 className="text-xl font-semibold"> {index + 1}</h3>
             <p className="mt-2">This is just a showcase of scroll animation.</p>
           </motion.div>
         ))}
