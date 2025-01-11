@@ -83,7 +83,6 @@ export default function Home() {
       </motion.p>
 
       {/* Sliding Projects Link */}
-      {/* Sliding Projects Link */}
       <motion.div
         initial={{ x: "-100vw", opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
@@ -138,6 +137,7 @@ export default function Home() {
               alt={"Dejny"}
               width={200}
               height={200}
+              className="w-48 h-64 md:w-2/3 md:h-2/3"
             />
           </motion.div>
 
