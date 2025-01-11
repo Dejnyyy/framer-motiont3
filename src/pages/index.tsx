@@ -188,7 +188,7 @@ export default function Home() {
                 y: 0,
               }}
               animate={{
-                opacity: [1, 0],
+                opacity: [1, 1],
                 scale: [1, 0.5],
                 x: Math.cos((index / particlesArray.length) * 2 * Math.PI) * 100,
                 y: Math.sin((index / particlesArray.length) * 2 * Math.PI) * 100,

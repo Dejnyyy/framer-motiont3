@@ -6,4 +6,6 @@
 * {
     cursor: none;
   }
-  
+  *::selection {
+    background-color: transparent;
+  }
