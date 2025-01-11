@@ -37,11 +37,13 @@ export default function Home() {
 
   const [showImage, setShowImage] = useState(false); // State to toggle between ball and image
   const { scrollY, scrollYProgress } = useScroll(); // Hook for scroll position and progress
-
-  // Transform scrollYProgress to x and y values dynamically
-  const x = useTransform(scrollYProgress, [0, 0.2,0.3, 0.4, 0.5, 0.7,0.8, 0.9], [0, -200,-200,-1200, -1200, -700,-700, -400]);
-  const y = useTransform(scrollY, (value) => value / 3);
-
+// Transform scrollYProgress to x and y values dynamically using percentages
+const x = useTransform(
+  scrollYProgress, 
+  [0, 0.2, 0.3, 0.4, 0.5,0.6, 0.7, 0.8, 0.9], 
+  ['0%', '-200%', '-200%', '-1000%', '-1200%', '-2500%','-800%', '-700%', '-40%']
+);
+const y = useTransform(scrollY, (value) => value / 3);
   useEffect(() => {
     
     // Toggle the image based on progress
@@ -152,7 +154,7 @@ export default function Home() {
             ease: "easeInOut", // Smooth easing function
           }}
         />
-       <Link href="/" className="absolute text-blue-400">
+       <Link href="/" className="absolute top-4 text-blue-400">
     <motion.div 
     whileHover={{
       rotate: [0, 5, -5, 5, -5, 0],
@@ -175,50 +177,51 @@ export default function Home() {
           </div>
         ))}
       </div>
+
     {/* Scrolling Section */}
     <div className="mt-16">
         <h2 className="text-2xl font-bold text-center mb-8">Explore More Features</h2>
         {/* Conditional Rendering for Ball or Image */}
         {!showImage ? (
-  <motion.div
-    className="fixed w-10 h-10 bg-gradient-to-tr from-pink-600 via-purple-500 to-blue-600 rounded-full"
-    style={{
-      top: "20px", // Ensure consistent top positioning
-      right: "12px",
-      x: x, // Dynamically bind x value
-      y: y, // Dynamically bind y value
-    }}
-    animate={{rotate:360}}
-    transition={{
-      type: "spring",
-      stiffness: 50,
-      repeat: Infinity,
-      duration: 1,
-      delay: 0,
-      damping: 10,
-    }}
-  />
-) : (
-  <motion.img
-    src="/dejny.png"
-    alt="Dynamic Image"
-    className="fixed w-20 h-20 top-4 right-12 rounded-full"
-    style={{
-      x: x, // Dynamically bind x value
-      y: y, // Dynamically bind y value
-    }}
-    animate={{rotate:-360}}
-    transition={{
-      type: "spring",
-      stiffness: 50,
-      repeat: Infinity,
-      duration: 2,
-      delay: 0,
-      damping: 12,
-    }}
-   
-  />
-)}
+        <motion.div
+          className="fixed w-10 h-10 bg-gradient-to-tr from-pink-600 via-purple-500 to-blue-600 rounded-full"
+          style={{
+            top: "20px", // Ensure consistent top positioning
+            right: "12px",
+            x: x, // Dynamically bind x value
+            y: y, // Dynamically bind y value
+          }}
+          animate={{rotate:360}}
+          transition={{
+            type: "spring",
+            stiffness: 50,
+            repeat: Infinity,
+            duration: 1,
+            delay: 0,
+            damping: 10,
+          }}
+        />
+      ) : (
+        <motion.img
+          src="/dejny.png"
+          alt="Dynamic Image"
+          className="fixed w-20 h-20 top-4 right-12 rounded-full"
+          style={{
+            x: x, // Dynamically bind x value
+            y: y, // Dynamically bind y value
+          }}
+          animate={{rotate:-360}}
+          transition={{
+            type: "spring",
+            stiffness: 50,
+            repeat: Infinity,
+            duration: 2,
+            delay: 0,
+            damping: 12,
+          }}
+        
+        />
+      )}
 
 
         {[...Array<number>(5)].map((_, index) => (
@@ -237,6 +240,7 @@ export default function Home() {
         ))}
         <div className="h-screen"></div>
       </div>
+
         {/* Render Fireworks */}
         {fireworks.map((fw) => (
         <motion.div
