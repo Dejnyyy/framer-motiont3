@@ -41,9 +41,9 @@ export default function Home() {
 const x = useTransform(
   scrollYProgress, 
   [0, 0.2, 0.3, 0.4, 0.5,0.6, 0.7, 0.8, 0.9], 
-  ['0%', '-200%', '-200%', '-1000%', '-1200%', '-2500%','-800%', '-700%', '-40%']
+  ['0%', '-200%', '-200%', '-1000%', '-1200%', '-800%','-400%', '-200%', '-300%']
 );
-const y = useTransform(scrollY, (value) => value / 3);
+const y = useTransform(scrollY, (value) => value / 5);
   useEffect(() => {
     
     // Toggle the image based on progress
